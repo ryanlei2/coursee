@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { StylesManager, Survey } from 'survey-react';
-import "survey-core/defaultV2.css";
+import "survey-core/defaultV2.min.css"; //newer
 import 'firebase/database';
 import * as firebase from 'firebase/app';
 import { coursesRef, rtdb, userResultsRef, userSelectionRef, saveSurveyData } from '../config/firebase';

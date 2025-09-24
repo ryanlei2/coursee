@@ -16,9 +16,7 @@
     "bootstrap": "^5.2.3",
     "firebase": "^9.17.1",
     "firebaseui": "^6.0.2",
-    "next": "^13.1.6",
-    "next-js": "^0.9.0-alpha",
-    "nextjs": "^0.0.3",
+    "next": "^15.5.4",
     "pdf-lib": "^1.17.1",
     "pdfkit": "^0.13.0",
     "pdfmake": "^0.2.7",
@@ -28,11 +26,11 @@
     "react-firebase-hooks": "^5.1.1",
     "react-icons": "^4.7.1",
     "react-router-dom": "^6.9.0",
-    "survey-core": "latest",
-    "survey-creator-core": "latest",
-    "survey-creator-react": "latest",
-    "survey-react": "^1.9.65",
-    "survey-react-ui": "^1.9.65"
+    "survey-core": "1.9.65",
+    "survey-creator-core": "1.9.65",
+    "survey-creator-react": "1.9.65",
+    "survey-react": "1.9.65",
+    "survey-react-ui": "1.9.65"
   },
   "devDependencies": {
     "@types/node": "18.13.0",

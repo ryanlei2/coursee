@@ -14,8 +14,8 @@ import { renderToString } from 'react-dom/server';
 
 const Results = () => {
   const router = useRouter()
-  pdfMake.vfs = pdfFonts.pdfMake.vfs;
-    // Set up the styles for the table
+  pdfMake.vfs = pdfFonts.vfs;
+  // Set up the styles for the table
   
   const [pdfURL, setPdfURL] = useState<string | null>(null);
   
