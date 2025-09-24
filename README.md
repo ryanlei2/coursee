@@ -9,7 +9,7 @@ Install yarn first to package the project
 Because this dynamic website does not have a domain associated with it, just download it, cd into it, and type 'yarn add next as well as yarn dev into the terminal:
 
 ```
-yarn add next
+yarn install
 yarn dev
 ```
 
