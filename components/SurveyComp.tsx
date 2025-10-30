@@ -195,13 +195,11 @@ function SurveyComp() {
     onComplete: any; 
     data: Record<string, any>;
   }) => {
-    console.log(survey.data)
     //create array to hold data
     const dataArray = Object.entries(survey.data).map(([key, value]) => ({
       question: key,
       answer: value
     }));
-    console.log(dataArray);
     analyzeSurveyData(dataArray)
     saveSurveyData(dataArray); // Save survey data to Firestore
 
@@ -228,21 +226,17 @@ function SurveyComp() {
     
 
     dataArray.forEach((value, index) => {
-      console.log(`Answer ${index + 1}:`);
       if (Array.isArray(value.answer)) {
         value.answer.forEach((choice: any, i: number) => {
-          //Choice ${i + 1}
-          console.log(`: ${choice}`); //get answer as choice if array answer
+          // Process array answers
         });
       } else {
-        console.log(`${value.answer}`); //get answer as value.answer if singular value
+        // Process single value answers
         //freshmen math
         //move this into the below logic of iteration
 
         if (index === 1) {
           rigor = value.answer
-          console.log('rigor is ' + rigor);
-          
         }
         //soph+ math
         if (index === 0) {
@@ -251,10 +245,8 @@ function SurveyComp() {
         if (index === 3) {
           if (value.answer === 'engineer') {
             choseEngineering = true
-            console.log('user chose engineering');
           } else if (value.answer === 'technology') {
             choseTechnology = true
-            console.log('user chose technology');
           }
         }
         if (index === 2) {

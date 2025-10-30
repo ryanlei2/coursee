@@ -73,8 +73,8 @@ function AdminDashboard() {
             <p>UserID: {feedbackItem.data.userId}</p>
             <p>Date: {feedbackItem.data.date}</p>
             <ul>
-              {feedbackItem.data.data.map((item) => (
-                <li>{item}</li>
+              {feedbackItem.data.data.map((item: string, index: number) => (
+                <li key={`${feedbackItem.id}-${index}`}>{item}</li>
               ))}
             </ul>
             <Button onClick={() => handleDelete(feedbackItem.id)}>Delete</Button>

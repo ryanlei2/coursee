@@ -20,14 +20,15 @@ const NavbarComp = () => {
   
   useEffect(() => {
     async function fetchAdminStatus() {
-      const isAdmin = await checkAdmin(user?.uid); // Use optional chaining to access uid property
+      if (!user?.uid) return;
+      const isAdmin = await checkAdmin(user.uid);
       setIsAdmin(isAdmin);
     }
   
     if (user && user.uid) {
       fetchAdminStatus();
     }
-  }, [user?.uid]);
+  }, [user]);
 
   return (
       <Navbar expand="xl" sticky='top' className={styles.navBar}
