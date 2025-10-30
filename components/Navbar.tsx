@@ -37,10 +37,10 @@ const NavbarComp = () => {
             <Image 
             className='shadow-sm'
             style={{
-              marginLeft: '30px',
-              marginRight: '20px',
+              marginLeft: '20px',
+              marginRight: '15px',
             }}
-              width="70" height="70"
+              width="50" height="50"
               src={favicon}
               alt='logo'
             />
