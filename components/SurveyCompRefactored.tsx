@@ -12,15 +12,18 @@ import { surveyAnalyzer } from '../services/surveyAnalyzer';
 import { validateSurveyData } from '../utils/validation';
 import { SurveyResponse, CourseRecommendations } from '../types';
 import { surveyJSON } from './SurveyJSON';
+import { saveSurveySubmission } from '../services/surveyHistoryService';
+import { useAuth } from '../context/AuthContext';
 
 const SurveyCompRefactored = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const { user } = useAuth();
 
   // Apply survey theme
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof globalThis.window !== 'undefined') {
       StylesManager.applyTheme('defaultV2');
     }
   }, []);
@@ -55,6 +58,16 @@ const SurveyCompRefactored = () => {
 
       // Handle empty recommendations (fallback logic)
       const finalRecommendations = handleEmptyRecommendations(recommendations);
+
+      // Save survey submission to history (if user is logged in)
+      if (user?.uid) {
+        try {
+          await saveSurveySubmission(user.uid, surveyData, finalRecommendations);
+        } catch (historyError) {
+          console.error('Failed to save survey history:', historyError);
+          // Don't block the user flow if history save fails
+        }
+      }
 
       // Navigate to results page with recommendations
       setTimeout(() => {

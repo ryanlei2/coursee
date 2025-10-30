@@ -1,6 +1,7 @@
 import router from 'next/router'
 import React, { useState } from 'react'
 import { Button, Form, Alert } from 'react-bootstrap'
+import Link from 'next/link'
 import { useAuth } from '../context/AuthContext'
 import { FirebaseError } from 'firebase/app'
 
@@ -122,9 +123,9 @@ const Signup = () => {
       
       <div className="text-center mt-3">
         Already have an account?{' '}
-        <a href="/login" style={{ textDecoration: 'none' }}>
+        <Link href="/login" style={{ textDecoration: 'none' }}>
           Login here
-        </a>
+        </Link>
       </div>
     </div>
   )
