@@ -18,8 +18,8 @@ export interface SurveyResponse {
 export interface Course {
   courseName: string;
   grade: string;
-  difficulty: 'easy' | 'medium' | 'hard';
-  category: 'math' | 'science' | 'stem' | 'pe' | 'health';
+  difficulty: 'easy' | 'intermediate' | 'recommended' | 'medium' | 'hard';
+  category: 'math' | 'science' | 'la' | 'social' | 'engineer' | 'technology' | 'stem' | 'pe' | 'health';
   credits?: number;
   prerequisites?: string[];
 }
