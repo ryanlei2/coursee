@@ -6,7 +6,7 @@ const Footer = () => {
         <Container>
         <Row>
             <Col>
-            Designed and Coded by RHS - 2023
+            Designed and Coded with ❤️💛❤️ by RHS © 2023
             </Col>
         </Row>
         </Container>
