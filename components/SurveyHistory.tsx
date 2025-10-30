@@ -123,7 +123,7 @@ const SurveyHistory: React.FC<SurveyHistoryProps> = ({ onSelectSurvey }) => {
       <Row>
         <Col md={12}>
           <div className="d-flex justify-content-between align-items-center mb-4">
-            <h3>📚 Survey History</h3>
+            <h3>Survey History</h3>
             <Dropdown>
               <Dropdown.Toggle variant="outline-primary" id="survey-history-dropdown">
                 {selectedSubmission?.label || 'Select a Survey'}

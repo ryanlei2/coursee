@@ -24,7 +24,7 @@ const StudentDashboard = () => {
         <Container className="mt-5">
           <Card className="shadow-sm">
             <Card.Header className="d-flex justify-content-between align-items-center">
-              <h4 className="mb-0">📋 Your Survey History</h4>
+              <h4 className="mb-0">Your Survey History</h4>
               <Button 
                 variant="outline-primary" 
                 size="sm"
