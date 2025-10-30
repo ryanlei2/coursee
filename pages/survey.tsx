@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import SurveyComp from '../components/SurveyComp'
+import SurveyComp from '../components/SurveyCompRefactored'
 
 
 export default function Survey() {
