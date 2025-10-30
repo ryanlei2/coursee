@@ -1,19 +1,98 @@
 .navBar {
-    z-index: 1;
-    background-color: #f1f1f1;
+    z-index: 1000;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     position: fixed;
     width: 100%;
+    padding: 0.75rem 2rem;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
 }
 
-.Nav.Link[aria-current] {
-    background-color: black;
+.navBar:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
-.brandIconHover{
-    transition: all 0.2s ease-out;
+.brandText {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: white !important;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
 }
+
+.brandText:hover {
+    transform: scale(1.05);
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
+}
+
+.navLink {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1.05rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    margin: 0 0.25rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.navLink:hover {
+    color: white !important;
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.navLink:active {
+    transform: translateY(0);
+}
+
+.navButton {
+    color: white !important;
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 0.6rem 1.5rem !important;
+    margin: 0 0.5rem;
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.navButton:hover {
+    background-color: white;
+    color: #667eea !important;
+    border-color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+.navButton:active {
+    transform: translateY(0);
+}
+
+.brandIconHover {
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
 .brandIconHover:hover {
-    transition: all 0.2s ease-out;
-    transform-origin: center center;
-    transform: scale(1.1);
+    transform: rotate(360deg) scale(1.1);
+}
+
+/* Mobile responsive */
+@media (max-width: 1200px) {
+    .navBar {
+        padding: 0.5rem 1rem;
+    }
+    
+    .navLink, .navButton {
+        margin: 0.25rem 0;
+    }
+    
+    .brandText {
+        font-size: 1.5rem;
+    }
 }

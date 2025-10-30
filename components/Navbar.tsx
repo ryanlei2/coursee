@@ -31,122 +31,92 @@ const NavbarComp = () => {
   }, [user]);
 
   return (
-      <Navbar expand="xl" sticky='top' className={styles.navBar}
-      style={{
-        height:'130px',
-        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
-      }}
-      >
+      <Navbar expand="xl" sticky='top' className={styles.navBar}>
         <Link href="/"  passHref legacyBehavior>
           <Nav.Link className={styles.brandIconHover}>
             <Image 
-            className='shadow-lg'
+            className='shadow-sm'
             style={{
               marginLeft: '30px',
-              marginRight: '30px',
+              marginRight: '20px',
             }}
-              width="80" height="80"
+              width="70" height="70"
               src={favicon}
               alt='logo'
             />
           </Nav.Link>
         </Link>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse>
-          <Nav
-          >
-            {user ? (
-              <div style={{
-                display: 'flex',
-              }}>
-              <Nav.Item className="ms-auto display-2" style={{marginRight: '20px'}}>
-                <Nav.Link className='' 
-                  onClick={() => {
-                    router.push('/dashboard')
-                  }}
-                >
-                  dashboard
-                </Nav.Link>
-              </Nav.Item>
-              </div>
-              
-            ) : (
-              <>
-              </>
-            )}
+        
+        <Navbar.Brand href="/" className={styles.brandText}>
+          Coursee
+        </Navbar.Brand>
+        
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className="me-3" />
+        
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ms-auto align-items-center">
             
-            {/* {!isAdmin && user ? (
-              <div style={{
-                display: 'flex',
-              }}>
-              <Nav.Item className="ms-auto display-2" style={{marginRight: '20px'}}>
-                <Nav.Link className='' 
-                  onClick={() => {
-                    router.push('/resultsPage')
-                  }}
-                >
-                  results
-                </Nav.Link>
-              </Nav.Item>
-              </div>
-              
-            ) : (
-              <>
-              </>
-            )} */}
-          </Nav>
-        <Nav className='container-fluid'>
-            {user ? (
-              <>
-              </>//if not logged in show btn
-            ) : (
-              <>
-                <Nav.Item className='display-2 ms-auto'>
-                  <Nav.Link href='/about' className='' aria-current="page">
-                    about
-                  </Nav.Link>
-                </Nav.Item>
-              </>
-            )}
-        </Nav>
-        <Nav className='container-fluid'>
-            {user ? (
-              <>
-              </>//if not logged in show btn
-            ) : (
-              <>
-                <Nav.Item className='display-2 ms-auto'>
-                  <Nav.Link href='/faq' className='' aria-current="page"
-                  >
-                    FAQ
-                  </Nav.Link>
-                </Nav.Item>
-              </>
-            )}
-        </Nav>
-        <Nav className='container-fluid'>
-          {user ? (
-            <Nav.Item className="ms-auto display-2">
-              <Nav.Link className=''
-                onClick={() => {
-                  logout()
-                  router.push('/login')
-                }}
-              >
-                logout
+            {/* Home/About/FAQ - visible to everyone */}
+            <Nav.Item>
+              <Nav.Link href='/' className={styles.navLink}>
+                Home
               </Nav.Link>
             </Nav.Item>
-          ) : (
-            <>
-              <Nav.Item className='ms-auto display-2'>
-                <Nav.Link href='/login' className='' aria-current="page">
-                  login
+            
+            <Nav.Item>
+              <Nav.Link href='/about' className={styles.navLink}>
+                About
+              </Nav.Link>
+            </Nav.Item>
+            
+            <Nav.Item>
+              <Nav.Link href='/faq' className={styles.navLink}>
+                FAQ
+              </Nav.Link>
+            </Nav.Item>
+            
+            <Nav.Item>
+              <Nav.Link href='/catalog' className={styles.navLink}>
+                Catalog
+              </Nav.Link>
+            </Nav.Item>
+            
+            {/* Dashboard - only for logged in users */}
+            {user && (
+              <Nav.Item>
+                <Nav.Link 
+                  onClick={() => router.push('/dashboard')}
+                  className={styles.navLink}
+                  style={{ cursor: 'pointer' }}
+                >
+                  Dashboard
                 </Nav.Link>
               </Nav.Item>
-            </>
-          )}
-        </Nav> 
-          </Navbar.Collapse>
+            )}
+            
+            {/* Login/Logout */}
+            {user ? (
+              <Nav.Item className="ms-3">
+                <Nav.Link
+                  onClick={() => {
+                    logout()
+                    router.push('/login')
+                  }}
+                  className={styles.navButton}
+                  style={{ cursor: 'pointer' }}
+                >
+                  Logout
+                </Nav.Link>
+              </Nav.Item>
+            ) : (
+              <Nav.Item className="ms-3">
+                <Nav.Link href='/login' className={styles.navButton}>
+                  Login
+                </Nav.Link>
+              </Nav.Item>
+            )}
+          </Nav>
+        </Navbar.Collapse>
     </Navbar>
   );
 }
