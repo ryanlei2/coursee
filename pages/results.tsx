@@ -86,8 +86,6 @@ const handleDownloadPDF = () => {
   // Function to download the PDF document
   const dataObj2:any = router.query.data
   const dataObj = router.query.data ? JSON.parse(dataObj2) : {};  
-  console.log(router.query.data);
-  console.log(JSON.stringify(data));
   const array = JSON.stringify(data)
   //math social science la
     const easyClasses = [
@@ -114,7 +112,6 @@ const handleDownloadPDF = () => {
   ];
   
   let easyScience: string[] = dataObj.easyScienceClasses
-  console.log(easyScience);
   let easyMath: string[] = dataObj.easyMathClasses
   let easySocial: string[] = dataObj.easySocialClasses
   let easyLA: string[] = dataObj.easyLAClasses
@@ -133,7 +130,6 @@ const handleDownloadPDF = () => {
   let stemBasedOnRigor: string[] = dataObj.stemChoicesBasedOnRigor
 
   const result = [easyClasses, hardClasses, recommendedClasses, otherClasses];
-  console.log(result);
 
   function convertArrayToObject(arr: any[]) {
     if (Array.isArray(arr)) {
@@ -152,7 +148,6 @@ const handleDownloadPDF = () => {
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const button = event.target as HTMLButtonElement;
     setButtonClicked(button.name);
-    console.log(buttonClicked);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -161,7 +156,6 @@ const handleDownloadPDF = () => {
     saveUserFeedback(feedbackData);
     setFeedback('');
     setButtonClicked('');
-    console.log(feedbackData);
   };
 
   return (
