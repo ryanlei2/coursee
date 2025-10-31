@@ -21,11 +21,14 @@ const Dashboard = () => {
 
   useEffect(() => {
     async function fetchAdminStatus() {
+      if (!user?.uid) return;
       const isAdmin = await checkAdmin(user.uid)
       setIsAdmin(isAdmin)
     }
-    fetchAdminStatus()
-  }, [user.uid])
+    if (user?.uid) {
+      fetchAdminStatus()
+    }
+  }, [user])
 
   return (
     <>

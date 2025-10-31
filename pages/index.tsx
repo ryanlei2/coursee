@@ -15,9 +15,6 @@ const Home: NextPage = () => {
 
   const [isHovered, setIsHovered] = useState(false);
 
-  function handleClick() {
-    console.log('increment like count');
-  }
   const { user, logout } = useAuth()
   const router = useRouter()
 

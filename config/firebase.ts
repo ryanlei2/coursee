@@ -4,16 +4,26 @@ import { getAuth } from 'firebase/auth';
 import { getDatabase, ref, get, child, equalTo, orderByValue } from 'firebase/database';
 import { Auth, sendPasswordResetEmail as firebaseSendPasswordResetEmail } from 'firebase/auth';
 
-
+// Firebase configuration using environment variables
 const firebaseConfig = {
-  apiKey: "AIzaSyCiepxy3bi0erjTOH-Ml-i5Kx4G63h-Wcs",
-  authDomain: "auth-dev-a6e74.firebaseapp.com",
-  projectId: "auth-dev-a6e74",
-  storageBucket: "auth-dev-a6e74.appspot.com",
-  messagingSenderId: "499650566146",
-  appId: "1:499650566146:web:3f66eb27507b72e5deaf1b"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
+// Validate required environment variables
+if (!firebaseConfig.apiKey) {
+  throw new Error('Missing NEXT_PUBLIC_FIREBASE_API_KEY environment variable');
+}
+if (!firebaseConfig.authDomain) {
+  throw new Error('Missing NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN environment variable');
+}
+if (!firebaseConfig.projectId) {
+  throw new Error('Missing NEXT_PUBLIC_FIREBASE_PROJECT_ID environment variable');
+}
 
 // initialize Firebase app
 const app = initializeApp(firebaseConfig);
@@ -36,7 +46,7 @@ export const adminsCollection = collection(db, 'admins');
 export const coursesCollection = collection(db, 'courses');
 
 // Function to check if a user is an admin
-export async function checkAdmin(userId: string) {
+export async function checkAdmin(userId: string): Promise<boolean> {
   try {
     //refer to admin collection within db
     const adminsRef = ref(rtdb, "admins");
@@ -44,15 +54,9 @@ export async function checkAdmin(userId: string) {
     const snapshot = await get(adminsRef);
     //once gotten set it to constant of all admins
     const admins = snapshot.val();
-    console.log(admins);
     
     //check if admins list is not empty and inclues current users id
     const isAdmin = admins && Object.values(admins).includes(userId);
-    if (isAdmin) {
-      console.log('User is an admin, loading admin dashboard');
-    } else {
-      console.log('User is NOT an admin, loading student dashboard');
-    }
     return isAdmin;
   } catch (error) {
     console.error('Error checking admin status:', error);
@@ -60,61 +64,62 @@ export async function checkAdmin(userId: string) {
   }
 }
 
-export const sendPasswordResetEmail = async (auth: Auth, email: string) => {
+export const sendPasswordResetEmail = async (auth: Auth, email: string): Promise<void> => {
   try {
-    await firebaseSendPasswordResetEmail(auth, email); // Modify the email value here
-    console.log('Password reset email sent successfully.')
+    await firebaseSendPasswordResetEmail(auth, email);
   } catch (error) {
-    console.log(error)
+    console.error('Error sending password reset email:', error);
+    throw error;
   }
 }
 
 
-export function saveSurveyData(surveyData: { question: string; answer: any; }[]) {
+export function saveSurveyData(surveyData: { question: string; answer: any; }[]): Promise<void> {
   //take user id
   const userId = auth.currentUser?.uid;
   if (!userId) {
     console.error('User is not logged in.');
-    return;
+    return Promise.reject(new Error('User is not logged in'));
   }
   //add document to the userSelectionRef firestore db with time added and data, which is survey res
-  addDoc(userSelectionRef, {
+  return addDoc(userSelectionRef, {
     userId: userId,
     timestamp: serverTimestamp(),
     data: surveyData,
   })
     .then(() => {
-      console.log("Survey data saved successfully to Cloud Firestore!");
+      // Survey data saved successfully
     })
-    .catch((error) => {
+    .catch((error: unknown) => {
       console.error("Error saving survey data: ", error);
+      throw error;
     });
 }
 
-export function saveUserFeedback(feedback: string[]) {
+export function saveUserFeedback(feedback: string[]): Promise<void> {
   //take user id
   const userId = auth.currentUser?.uid;
   const email = auth.currentUser?.email;
-  console.log(email);
   if (!email) {
     console.error('User email not available.');
-    return;
+    return Promise.reject(new Error('User email not available'));
   }
   if (!userId) {
     console.error('User is not logged in.');
-    return;
+    return Promise.reject(new Error('User is not logged in'));
   }
   //add document to the userSelectionRef firestore db with time added and data, which is user feedback
-  addDoc(userFeedbackRef, {
+  return addDoc(userFeedbackRef, {
     userId: userId,
     userEmail: email,
     date: new Date().toLocaleDateString('en-GB'),
     data: feedback
   })
     .then(() => {
-      console.log("User feedback saved successfully to Cloud Firestore!");
+      // User feedback saved successfully
     })
-    .catch((error) => {
+    .catch((error: unknown) => {
       console.error("Error saving user feedback: ", error);
+      throw error;
     });
 }

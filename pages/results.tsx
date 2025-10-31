@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Container, Table, Button, Form, Row } from 'react-bootstrap';
+import { Container, Table, Button, Form, Row, Alert, Card, Col } from 'react-bootstrap';
 import { saveUserFeedback } from '../config/firebase';
 import { useLocation } from 'react-router-dom';
 import { useRouter } from 'next/router';
@@ -86,8 +86,6 @@ const handleDownloadPDF = () => {
   // Function to download the PDF document
   const dataObj2:any = router.query.data
   const dataObj = router.query.data ? JSON.parse(dataObj2) : {};  
-  console.log(router.query.data);
-  console.log(JSON.stringify(data));
   const array = JSON.stringify(data)
   //math social science la
     const easyClasses = [
@@ -114,7 +112,6 @@ const handleDownloadPDF = () => {
   ];
   
   let easyScience: string[] = dataObj.easyScienceClasses
-  console.log(easyScience);
   let easyMath: string[] = dataObj.easyMathClasses
   let easySocial: string[] = dataObj.easySocialClasses
   let easyLA: string[] = dataObj.easyLAClasses
@@ -133,7 +130,6 @@ const handleDownloadPDF = () => {
   let stemBasedOnRigor: string[] = dataObj.stemChoicesBasedOnRigor
 
   const result = [easyClasses, hardClasses, recommendedClasses, otherClasses];
-  console.log(result);
 
   function convertArrayToObject(arr: any[]) {
     if (Array.isArray(arr)) {
@@ -144,6 +140,7 @@ const handleDownloadPDF = () => {
   }
   const [feedback, setFeedback] = useState('');
   const [buttonClicked, setButtonClicked] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
   const handleFeedbackChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFeedback(event.target.value);
@@ -152,7 +149,6 @@ const handleDownloadPDF = () => {
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const button = event.target as HTMLButtonElement;
     setButtonClicked(button.name);
-    console.log(buttonClicked);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -161,7 +157,12 @@ const handleDownloadPDF = () => {
     saveUserFeedback(feedbackData);
     setFeedback('');
     setButtonClicked('');
-    console.log(feedbackData);
+    setSubmitted(true);
+    
+    // Hide success message after 5 seconds
+    setTimeout(() => {
+      setSubmitted(false);
+    }, 5000);
   };
 
   return (
@@ -220,26 +221,68 @@ const handleDownloadPDF = () => {
         </Container>
       </div>
       <Container>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '2rem' }}>
-          <Button variant='success' size='lg' name='agree' onClick={handleButtonClick}>
-            Agree
-          </Button>
-          <Button variant='danger' size='lg' name='disagree' onClick={handleButtonClick}>
-            Disagree
-          </Button>
-        </div>
-        <div style={{ marginTop: '2rem' }}>
-          <h3>Feedback</h3>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group controlId='feedbackForm'>
-              <Form.Control as='textarea' rows={3} value={feedback} onChange={handleFeedbackChange}/>
-              <Button variant='primary' type='submit' style={{ marginTop: '3rem', marginBottom: '100px' }}>
-                Submit Feedback
+        {submitted && (
+          <Alert variant="success" className="mt-4">
+            <Alert.Heading>Thank you for your feedback!</Alert.Heading>
+            <p>Your response has been submitted successfully.</p>
+          </Alert>
+        )}
+        
+        <Card className="mt-4 shadow-sm">
+          <Card.Header className="bg-primary text-white">
+            <h5 className="mb-0">How do you feel about these recommendations?</h5>
+          </Card.Header>
+          <Card.Body>
+            <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '2rem' }}>
+              <Button 
+                variant={buttonClicked === 'agree' ? 'success' : 'outline-success'} 
+                size='lg' 
+                name='agree' 
+                onClick={handleButtonClick}
+                style={{ minWidth: '150px' }}
+              >
+                {buttonClicked === 'agree' ? '✓ Agree' : 'Agree'}
               </Button>
-            </Form.Group>
-          </Form>
-        </div>
-        <div>
+              <Button 
+                variant={buttonClicked === 'disagree' ? 'danger' : 'outline-danger'} 
+                size='lg' 
+                name='disagree' 
+                onClick={handleButtonClick}
+                style={{ minWidth: '150px' }}
+              >
+                {buttonClicked === 'disagree' ? '✗ Disagree' : 'Disagree'}
+              </Button>
+            </div>
+            
+            <Form onSubmit={handleSubmit}>
+              <Form.Group controlId='feedbackForm'>
+                <Form.Label><strong>Additional Comments (Optional)</strong></Form.Label>
+                <Form.Control 
+                  as='textarea' 
+                  rows={3} 
+                  value={feedback} 
+                  onChange={handleFeedbackChange}
+                  placeholder="Tell us what you think about these recommendations..."
+                />
+                <Button 
+                  variant='primary' 
+                  type='submit' 
+                  style={{ marginTop: '1rem' }}
+                  disabled={!buttonClicked}
+                >
+                  Submit Feedback
+                </Button>
+                {!buttonClicked && (
+                  <Form.Text className="text-muted d-block mt-2">
+                    Please select Agree or Disagree before submitting
+                  </Form.Text>
+                )}
+              </Form.Group>
+            </Form>
+          </Card.Body>
+        </Card>
+
+        <div style={{ marginTop: '3rem', marginBottom: '100px' }}>
           {/* Existing JSX code */}
           <Button variant="primary" onClick={handleDownloadPDF}>
             Download PDF

@@ -1,25 +1,30 @@
 import React, { useState } from 'react';
-import { Form, Button, Container } from 'react-bootstrap';
+import { Form, Button, Container, Alert } from 'react-bootstrap';
 import { auth, sendPasswordResetEmail } from '../config/firebase';
 
 const PasswordResetForm = () => {
     const [email, setEmail] = useState('');
-//send it!
+    const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
+
     const handlePasswordReset = async (email: string) => {
-        console.log('Sending password reset email to:', email);
         try {
             await sendPasswordResetEmail(auth, email);
-            console.log('Password reset email sent successfully.')
-        } catch (error) {
-            console.log(error)
+            setMessage('Password reset email sent successfully. Check your inbox.');
+            setError('');
+            setEmail('');
+        } catch (err) {
+            setError('Failed to send password reset email. Please try again.');
+            setMessage('');
         }
-        }
-    //what to do if button clicked
+    }
+
     const handleSendPasswordResetEmail = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         if (!email.match(/^\S+@\S+\.\S+$/)) {
-            console.log('Invalid email format.');
-        return;
+            setError('Invalid email format.');
+            setMessage('');
+            return;
         }
         handlePasswordReset(email);
     }
@@ -34,6 +39,9 @@ const PasswordResetForm = () => {
             alignContent:'space-between',
 
         }}>
+            {message && <Alert variant="success">{message}</Alert>}
+            {error && <Alert variant="danger">{error}</Alert>}
+            
             <Form>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>

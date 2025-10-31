@@ -1,19 +1,86 @@
 .navBar {
-    z-index: 1;
+    z-index: 1000;
     background-color: #f1f1f1;
     position: fixed;
     width: 100%;
+    padding: 0.5rem 1.5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: all 0.3s ease;
 }
 
-.Nav.Link[aria-current] {
-    background-color: black;
+.brandText {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333 !important;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
 }
 
-.brandIconHover{
-    transition: all 0.2s ease-out;
+.brandText:hover {
+    color: #667eea !important;
 }
+
+.navLink {
+    color: #333 !important;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    margin: 0 0.25rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.navLink:hover {
+    color: #667eea !important;
+    background-color: rgba(102, 126, 234, 0.1);
+}
+
+.navButton {
+    color: white !important;
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 0.5rem 1.25rem !important;
+    margin: 0 0.5rem;
+    border-radius: 4px;
+    background-color: #667eea;
+    border: 2px solid #667eea;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.navButton:hover {
+    background-color: #5568d3;
+    border-color: #5568d3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.navButton:active {
+    transform: translateY(0);
+}
+
+.brandIconHover {
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
 .brandIconHover:hover {
-    transition: all 0.2s ease-out;
-    transform-origin: center center;
     transform: scale(1.1);
+}
+
+/* Mobile responsive */
+@media (max-width: 1200px) {
+    .navBar {
+        padding: 0.5rem 1rem;
+    }
+    
+    .navLink, .navButton {
+        margin: 0.25rem 0;
+    }
+    
+    .brandText {
+        font-size: 1.25rem;
+    }
 }
