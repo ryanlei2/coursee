@@ -3,6 +3,59 @@ body {
   padding: 0;
   margin: 0;
   font-size: 0.7rem;
+  background-color: #EFF3FE;
+  color: #000000;
+  overflow-x: hidden;
+}
+
+body.logged-in {
+  background-color: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Force navbar transparency */
+.navbar {
+  background-color: transparent !important;
+  background: none !important;
+  background-image: none !important;
+}
+
+.navbar-expand-xl {
+  background-color: transparent !important;
+  background: none !important;
+  background-image: none !important;
+}
+
+.navbar-light {
+  background-color: transparent !important;
+  background: none !important;
+  background-image: none !important;
+}
+
+.bg-light {
+  background-color: transparent !important;
+  background: none !important;
+  background-image: none !important;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Center all page content */
+body > * {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .survey {
@@ -49,7 +102,6 @@ body {
 .surveyBtn:hover {
   color: rgb(255, 255, 255);
   background-color: #5a5a5a;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
   transform: translateY(-2px);
 }
 

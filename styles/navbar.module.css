@@ -1,20 +1,47 @@
 .navBar {
     z-index: 1000;
-    background-color: #f1f1f1;
-    position: fixed;
-    width: 100%;
-    padding: 0.5rem 1.5rem;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: transparent !important;
+    background: none !important;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding: 0.5rem 0;
     transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.navBar.navbar {
+    background-color: transparent !important;
+    background: none !important;
+}
+
+.navBar .navbar-nav {
+    max-width: 1400px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3rem;
+}
+
+.brandContainer {
+    display: flex;
+    align-items: center;
 }
 
 .brandText {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #333 !important;
+    color: #000000 !important;
     text-decoration: none;
     letter-spacing: 0.5px;
     transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    color: #000000 !important;
 }
 
 .brandText:hover {
@@ -22,7 +49,7 @@
 }
 
 .navLink {
-    color: #333 !important;
+    color: #000000 !important;
     font-size: 1.1rem;
     font-weight: 500;
     padding: 0.5rem 1rem !important;
@@ -30,6 +57,10 @@
     border-radius: 4px;
     transition: all 0.3s ease;
     text-decoration: none;
+}
+
+.nav-link {
+    color: #000000 !important;
 }
 
 .navLink:hover {
@@ -54,7 +85,6 @@
     background-color: #5568d3;
     border-color: #5568d3;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
 }
 
 .navButton:active {
@@ -68,6 +98,15 @@
 
 .brandIconHover:hover {
     transform: scale(1.1);
+}
+
+.navToggle {
+    border: none !important;
+    outline: none !important;
+}
+
+.navToggle:focus {
+    box-shadow: none !important;
 }
 
 /* Mobile responsive */

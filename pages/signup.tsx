@@ -4,6 +4,8 @@ import { Button, Form, Alert } from 'react-bootstrap'
 import Link from 'next/link'
 import { useAuth } from '../context/AuthContext'
 import { FirebaseError } from 'firebase/app'
+import Image from 'next/image'
+import favicon from '../assets/favicon.ico'
 
 const Signup = () => {
   const { user, signup } = useAuth()
@@ -54,16 +56,18 @@ const Signup = () => {
   }
 
   return (
-    <div
-      style={{
-        width: '40%',
-        margin: 'auto',
-        fontSize: '2vmax',
-        marginTop: '150px',
-        marginBottom: '400px'
-      }}
-    >
-      <h1 className="text-center my-3 display-3">Signup</h1>
+    <>
+      <style jsx global>{`
+        body { overflow: hidden; }
+      `}</style>
+      <div style={{ height: '100vh', width: '100vw', backgroundColor: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', flexDirection: 'column', overflow: 'hidden', position: 'fixed', top: 0, left: 0 }}>
+        <Link href='/' style={{ position: 'absolute', top: '2rem', left: '2rem', color: '#667eea', textDecoration: 'none', fontSize: '16px' }}>← Back to Home</Link>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '2rem' }}>
+        <Image src={favicon} alt='Coursee logo' width={40} height={40} style={{ marginRight: '12px' }} />
+        <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#000000', margin: 0 }}>Coursee</h2>
+      </div>
+      <div style={{ maxWidth: '500px', width: '100%', padding: '3rem', backgroundColor: '#ffffff', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.1)' }}>
+        <h1 style={{ textAlign: 'center', marginBottom: '2rem', fontSize: '2rem', fontWeight: 'bold', color: '#000000' }}>Create your account</h1>
       
       {error && (
         <Alert variant="danger" onClose={() => setError('')} dismissible>
@@ -112,22 +116,33 @@ const Signup = () => {
         </Form.Group>
 
         <Button 
-          variant="primary" 
           type="submit"
-          style={{ height: '40px', fontSize:'20px', marginTop:'30px' }}
+          style={{ 
+            width: '100%',
+            height: '50px', 
+            fontSize: '18px', 
+            marginTop: '20px', 
+            marginBottom: '20px',
+            backgroundColor: '#667eea',
+            border: 'none',
+            borderRadius: '8px',
+            fontWeight: '600'
+          }}
           disabled={loading}
         >
-          {loading ? 'Creating Account...' : 'Signup'}
+          {loading ? 'Creating Account...' : 'Sign Up'}
         </Button>
       </Form>
       
-      <div className="text-center mt-3">
-        Already have an account?{' '}
-        <Link href="/login" style={{ textDecoration: 'none' }}>
+      <div style={{ textAlign: 'center', marginTop: '20px', paddingTop: '20px', borderTop: '1px solid #e0e0e0' }}>
+        <p style={{ color: '#666' }}>Already have an account?{' '}
+        <Link href="/login" style={{ color: '#667eea', textDecoration: 'none' }}>
           Login here
-        </Link>
+        </Link></p>
       </div>
-    </div>
+        </div>
+      </div>
+    </>
   )
 }
 

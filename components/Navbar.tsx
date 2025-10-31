@@ -14,6 +14,7 @@ const NavbarComp = () => {
   const { user, logout } = useAuth()
   const router = useRouter()
   const [isAdmin, setIsAdmin] = useState(false)
+  const isHomePage = router.pathname === '/'
 
   
   useEffect(() => {
@@ -29,34 +30,47 @@ const NavbarComp = () => {
   }, [user]);
 
   return (
-      <Navbar expand="xl" sticky='top' className={styles.navBar}>
-        <Link href="/"  passHref legacyBehavior>
-          <Nav.Link className={styles.brandIconHover}>
-            <Image 
-            className='shadow-sm'
-            style={{
-              marginLeft: '20px',
-              marginRight: '15px',
-            }}
-              width="50" height="50"
-              src={favicon}
-              alt='logo'
-            />
-          </Nav.Link>
-        </Link>
-        
-        <Link href="/" passHref legacyBehavior>
-          <Navbar.Brand className={styles.brandText}>
-            Coursee
-          </Navbar.Brand>
-        </Link>
-        
-        <Navbar.Toggle aria-controls="basic-navbar-nav" className="me-3" />
-        
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto align-items-center">
+      <Navbar expand="xl" className={styles.navBar}>
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: (user && !isHomePage) ? '#ffffff' : '#EFF3FE',
+          backgroundImage: (user && !isHomePage) ? 'none' : 'linear-gradient(rgba(102, 126, 234, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(102, 126, 234, 0.15) 1px, transparent 1px)',
+          backgroundSize: '20px 20px',
+          backgroundPosition: '0 0',
+          zIndex: -1
+        }}></div>
+        <div style={{ maxWidth: '1400px', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 3rem' }}>
+          <div className={styles.brandContainer}>
+            <Link href="/"  passHref legacyBehavior>
+              <Nav.Link className={styles.brandIconHover}>
+                <Image 
+                style={{
+                  marginRight: '10px',
+                }}
+                  width="30" height="30"
+                  src={favicon}
+                  alt='logo'
+                />
+              </Nav.Link>
+            </Link>
             
-            {/* Home/About/FAQ - only visible when not logged in */}
+            <Link href="/" passHref legacyBehavior>
+              <Navbar.Brand className={styles.brandText}>
+                Coursee
+              </Navbar.Brand>
+            </Link>
+          </div>
+          
+          <Navbar.Toggle aria-controls="basic-navbar-nav" className={`me-3 ${styles.navToggle}`} />
+          
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ms-auto align-items-center">
+            
+            {/* Home/About - only visible when not logged in */}
             {!user && (
               <>
                 <Nav.Item>
@@ -74,24 +88,8 @@ const NavbarComp = () => {
                     </Nav.Link>
                   </Link>
                 </Nav.Item>
-                
-                <Nav.Item>
-                  <Link href='/faq' passHref legacyBehavior>
-                    <Nav.Link className={styles.navLink}>
-                      FAQ
-                    </Nav.Link>
-                  </Link>
-                </Nav.Item>
               </>
             )}
-            
-            <Nav.Item>
-              <Link href='/catalog' passHref legacyBehavior>
-                <Nav.Link className={styles.navLink}>
-                  Catalog
-                </Nav.Link>
-              </Link>
-            </Nav.Item>
             
             {/* Dashboard - only for logged in users */}
             {user && (
@@ -129,6 +127,7 @@ const NavbarComp = () => {
             )}
           </Nav>
         </Navbar.Collapse>
+        </div>
     </Navbar>
   );
 }

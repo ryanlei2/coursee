@@ -1,22 +1,10 @@
 import type { NextPage } from 'next'
-import { Button, Card, Container, Row, Col, ButtonGroup } from 'react-bootstrap'
-import styles from '../styles/home.module.css'
-import banner from '../assets/banner.png'
 import Link from 'next/link'
-import { IBM_Plex_Sans } from '@next/font/google'
 import { useAuth } from '../context/AuthContext'
-import { useRouter } from 'next/router'
-import Image from 'next/image'
-import faq1 from '../assets/faq1.png'
-import { useState } from 'react'
 
 
 const Home: NextPage = () => {
-
-  const [isHovered, setIsHovered] = useState(false);
-
-  const { user, logout } = useAuth()
-  const router = useRouter()
+  const { user } = useAuth()
 
   try {
     // Your code to display the image
@@ -25,131 +13,80 @@ const Home: NextPage = () => {
   }
   return (
     <div className='text-center'>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "400px", width:'100vw', marginBottom:'29em', marginTop:'200px' }}>
-        <Container fluid style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "200%" }}>
-          <div style={{ position: "relative", height: "100%", width: "100vw" }}>
-            <Image src={banner} alt='banner' style={{ height: "100%", width: "100vw", objectFit:'cover'}} />
-            <div className={styles.bannerText} style={{position: "absolute", top: 70, left: 0, height: "100%", width: "100%", display: "flex" , alignItems: "center", justifyContent: "center"}}>
-              <h1 style={{ fontSize: "0.7em" }}>
-                <b style={{ fontSize: "5.5em" }}>Let&apos;s Plan Together</b>
-                <p style={{ fontSize: "3.5em" }}>We&apos;re on a mission to help every student choose the right path.</p>
-                <Link href={"/survey"}
-                legacyBehavior>
-                  <a 
-                    className='shadow-lg'
-                    style={{ fontSize: "3em" }}
-                    onClick={() => {
-                      {user ? (
-                        router.push('/survey')
-                      ) : (
-                        router.push('/signup')
-                      )}
-                        
-                      }} 
-                  >Get Started</a>
-                </Link>
-              </h1>
-            </div>
-          </div>
-        </Container>
-      </div>
-      <div
-      style={{
-        width: '80%',
-        margin: 'auto',
-        paddingBottom: '150px',
-      }}> 
-        <h2 className={styles.titleText}
-        style={{
-          marginBottom:'200px',
-          fontSize: '70px',
-          fontWeight: 'normal'
-        }}
-        >Unsure about your class selection?</h2>
-        <Row style={{
-          justifyContent:'center',
-        }}>
-          <Card className={`${styles.card} ${isHovered ? styles.cardHover : ''}`} 
-                  onMouseEnter={() => setIsHovered(true)}
-                  onMouseLeave={() => setIsHovered(false)}
-                border="success" style={{ width: '40rem', marginRight: '100px', boxShadow: "20px 20px 0.2px #9E9E9E" }}>
-            <Card.Img variant="top" src='https://cdn.discordapp.com/attachments/1046981658617860186/1087508397890478272/faq4.png' style={{marginBottom: '50px', marginTop: '40px'}}/>
-            <Card.Body>
-              <Card.Title className='display-6'
-              style={{
-                fontWeight:'bold',
-                fontSize: '70px'
-              }}
-              >FAQ</Card.Title>
-              <Card.Text style={{
-                fontSize:'2.7rem'
+      <div style={{ 
+        backgroundColor: '#EFF3FE',
+        backgroundImage: 'linear-gradient(rgba(102, 126, 234, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(102, 126, 234, 0.15) 1px, transparent 1px)',
+        backgroundSize: '20px 20px',
+        backgroundPosition: '0 0',
+        height: '150px', 
+        width: '100vw', 
+        position: 'relative', 
+        left: '50%', 
+        right: '50%', 
+        marginLeft: '-50vw', 
+        marginRight: '-50vw',
+        marginTop: '-80px',
+        paddingTop: '80px',
+        maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 100%)',
+        WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 100%)'
+      }}></div>
+      <div style={{ 
+        backgroundColor: '#EFF3FE',
+        backgroundImage: 'linear-gradient(rgba(102, 126, 234, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(102, 126, 234, 0.15) 1px, transparent 1px)',
+        backgroundSize: '20px 20px',
+        backgroundPosition: '0 -150px',
+        marginBottom: '200px', 
+        width: '100vw', 
+        marginLeft: 'calc(-50vw + 50%)', 
+        marginRight: 'calc(-50vw + 50%)',
+        maskImage: 'linear-gradient(to bottom, black 0%, black 80%, transparent 100%)',
+        WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 80%, transparent 100%)'
+      }}>
+        <div style={{ textAlign: 'left', padding: '0 0 100px 0', maxWidth: '1400px', margin: '0 auto', paddingLeft: '1rem', paddingRight: '1rem' }}>
+          <h1 style={{ fontSize: '4rem', fontWeight: 'bold', marginBottom: '2rem', color: '#000000', paddingLeft: '2rem' }}>
+            Let&apos;s Plan Together
+          </h1>
+          <p style={{ fontSize: '1.5rem', marginBottom: '3rem', color: '#000000', maxWidth: '600px', paddingLeft: '2rem' }}>
+            We&apos;re on a mission to help every student choose the right path.
+          </p>
+          <div style={{ paddingLeft: '2rem' }}>
+            <Link href={user ? "/survey" : "/signup"} legacyBehavior>
+              <a style={{ 
+                fontSize: '1.2rem', 
+                padding: '15px 30px', 
+                backgroundColor: '#667eea', 
+                color: 'white', 
+                textDecoration: 'none', 
+                borderRadius: '8px',
+                display: 'inline-block',
+                transition: 'all 0.3s ease'
               }}>
-                Have a question you need answered?
-              </Card.Text>
-                <Link href="/faq">
-                  <Button style={{height: '50px', width: '100px', fontSize: '1.3rem', marginBottom:'40px'}} variant="primary">Click Here</Button>
-                </Link>
-            </Card.Body>
-          </Card>
-          <Card className={`${styles.card} ${isHovered ? styles.cardHover : ''}`} 
-                  onMouseEnter={() => setIsHovered(true)}
-                  onMouseLeave={() => setIsHovered(false)} 
-                border="success" style={{ width: '40rem', marginLeft:'100px', boxShadow: "20px 20px 0.2px #9E9E9E" }}>
-            <Card.Img style={{marginBottom: '50px', marginTop: '40px'}} variant="top" src="https://cdn.discordapp.com/attachments/1046981658617860186/1087514783252762654/catalog2.png" />
-            <Card.Body>
-              <Card.Title className='display-6'
-              style={{
-                fontWeight:'bold',
-                fontSize: '70px'
-              }}
-              >Catalog</Card.Title>
-              <Card.Text style={{
-                fontSize:'2.7rem'
-              }}>
-                Take a look at our course catalog!
-              </Card.Text>              
-              <Link href="https://resources.finalsite.net/images/v1677715498/rsdedu/livi36kif2azcpamtafa/RSDHighSchoolCatalog2023-2024Digital.pdf">
-                  <Button style={{height: '50px', width: '100px', fontSize: '1.3rem'}} variant="primary">Click Here</Button>
-                </Link>
-            </Card.Body>
-          </Card>
-        </Row>
-      </div>
-      <div
-      style={{
-        marginTop: '200px',
-        marginBottom: '100px',
-        backgroundColor:'#C9F0FF',
-        height:'300px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-      >
-          <div className='display-5'
-          style={{width:'70%',
-            backgroundColor:'#caf0f8',
-            height:'400px',
-            position: 'relative',
-            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-          }}
-          >
-            <h1 className='display-1'
-            style={{
-              marginTop: '100px',
-              marginBottom:'20px'
-            }}
-            >Why Coursee?
-            </h1>
-              Coursee is a streamlined and free way of choosing your courses without any external guidance. <br
-              style={{
-                marginBottom:'30px'
-              }}
-              ></br>
-                <Link className='display-4' href={'/about'}>
-                  About
-                </Link>
+                Get Started
+              </a>
+            </Link>
           </div>
+        </div>
+      </div>
+      
+      <div style={{ maxWidth: '1400px', margin: '-150px auto 20px auto', padding: '0 1rem' }}>
+        <h2 style={{ textAlign: 'center', fontSize: '3rem', fontWeight: 'bold', color: '#000000', marginBottom: '4rem' }}>Key Features</h2>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem' }}>
+          <div style={{ textAlign: 'left' }}>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#000000', marginBottom: '1rem' }}>Smart Course Matching</h3>
+            <p style={{ color: '#666', lineHeight: '1.6' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+          
+          <div style={{ textAlign: 'left' }}>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#000000', marginBottom: '1rem' }}>Personalized Recommendations</h3>
+            <p style={{ color: '#666', lineHeight: '1.6' }}>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          </div>
+          
+          <div style={{ textAlign: 'left' }}>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#000000', marginBottom: '1rem' }}>Academic Planning</h3>
+            <p style={{ color: '#666', lineHeight: '1.6' }}>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+          </div>
+        </div>
       </div>
     </div>
       
