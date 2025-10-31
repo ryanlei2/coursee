@@ -1,7 +1,5 @@
 # Coursee
 
-![image](https://user-images.githubusercontent.com/37818919/222242389-c5afd4cf-2130-469b-a7d4-97b7543f26cf.png)
-
 # Running Coursee
 
 Install yarn first to package the project
@@ -24,9 +22,9 @@ or
 FEATURES
 
 - [ ] complete ui overhaul
-  - [ ] landing page should be minimal with just sign in / sign up button
-  - [ ] redo hero section (banner should not break with resizing)
-  - [ ] remove absolute positioning on navbar: scroll should make it disappear
-  - [ ] remove shadows on everything
-  - [ ] key features tab (3 simple things)
-  - [ ] erase faq and catalog, should eventually create functionality to upload + scrape pdf
+  - [X] landing page should be minimal with just sign in / sign up button
+  - [X] redo hero section (banner should not break with resizing)
+  - [X] remove absolute positioning on navbar: scroll should make it disappear
+  - [X] remove shadows on everything
+  - [X] key features tab (3 simple things)
+  - [X] erase faq and catalog, should eventually create functionality to upload + scrape pdf
