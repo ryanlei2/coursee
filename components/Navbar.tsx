@@ -8,8 +8,6 @@ import favicon from '../assets/favicon.ico'
 import styles from '../styles/navbar.module.css'
 
 import { checkAdmin } from '../config/firebase'
-import AdminDashboard from "../components/AdminDashboard"
-import StudentDashboard from '../components/StudentDashboard'
 
 
 const NavbarComp = () => {
@@ -47,50 +45,62 @@ const NavbarComp = () => {
           </Nav.Link>
         </Link>
         
-        <Navbar.Brand href="/" className={styles.brandText}>
-          Coursee
-        </Navbar.Brand>
+        <Link href="/" passHref legacyBehavior>
+          <Navbar.Brand className={styles.brandText}>
+            Coursee
+          </Navbar.Brand>
+        </Link>
         
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="me-3" />
         
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto align-items-center">
             
-            {/* Home/About/FAQ - visible to everyone */}
-            <Nav.Item>
-              <Nav.Link href='/' className={styles.navLink}>
-                Home
-              </Nav.Link>
-            </Nav.Item>
+            {/* Home/About/FAQ - only visible when not logged in */}
+            {!user && (
+              <>
+                <Nav.Item>
+                  <Link href='/' passHref legacyBehavior>
+                    <Nav.Link className={styles.navLink}>
+                      Home
+                    </Nav.Link>
+                  </Link>
+                </Nav.Item>
+                
+                <Nav.Item>
+                  <Link href='/about' passHref legacyBehavior>
+                    <Nav.Link className={styles.navLink}>
+                      About
+                    </Nav.Link>
+                  </Link>
+                </Nav.Item>
+                
+                <Nav.Item>
+                  <Link href='/faq' passHref legacyBehavior>
+                    <Nav.Link className={styles.navLink}>
+                      FAQ
+                    </Nav.Link>
+                  </Link>
+                </Nav.Item>
+              </>
+            )}
             
             <Nav.Item>
-              <Nav.Link href='/about' className={styles.navLink}>
-                About
-              </Nav.Link>
-            </Nav.Item>
-            
-            <Nav.Item>
-              <Nav.Link href='/faq' className={styles.navLink}>
-                FAQ
-              </Nav.Link>
-            </Nav.Item>
-            
-            <Nav.Item>
-              <Nav.Link href='/catalog' className={styles.navLink}>
-                Catalog
-              </Nav.Link>
+              <Link href='/catalog' passHref legacyBehavior>
+                <Nav.Link className={styles.navLink}>
+                  Catalog
+                </Nav.Link>
+              </Link>
             </Nav.Item>
             
             {/* Dashboard - only for logged in users */}
             {user && (
               <Nav.Item>
-                <Nav.Link 
-                  onClick={() => router.push('/dashboard')}
-                  className={styles.navLink}
-                  style={{ cursor: 'pointer' }}
-                >
-                  Dashboard
-                </Nav.Link>
+                <Link href='/dashboard' passHref legacyBehavior>
+                  <Nav.Link className={styles.navLink}>
+                    Dashboard
+                  </Nav.Link>
+                </Link>
               </Nav.Item>
             )}
             
@@ -110,9 +120,11 @@ const NavbarComp = () => {
               </Nav.Item>
             ) : (
               <Nav.Item className="ms-3">
-                <Nav.Link href='/login' className={styles.navButton}>
-                  Login
-                </Nav.Link>
+                <Link href='/login' passHref legacyBehavior>
+                  <Nav.Link className={styles.navButton}>
+                    Login
+                  </Nav.Link>
+                </Link>
               </Nav.Item>
             )}
           </Nav>
