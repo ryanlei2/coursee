@@ -21,28 +21,12 @@ or
 
 ## TODO
 
-EXTRA FEATURES
+FEATURES
 
-- [x] check if email is already registered, if so, notify at signup, maybe also if login is bad, once user has completed survey, take away option from dash
-
-- [x] create admin role with elevated privileges to input classes
-
-- [x] implemenation idea: check if user has a certain ID token, if so, give access to them by their token
-
-- [x] make the buttons on index cards with reactbootstrap
-
-- [ ] once student completes survey and sees choices for classes chosen, let them give feedback and thumbs up/down, which should display on admin page
-
-- [ ] student should see history of all recommended courses from a dropdown, this should be a saved in another collection for firestore/realtime db in the user's collection, or make a new collection with just the user's id to grab it from (think about this in the future).
-
-### IMPORTANT
-
-- [ ] add career options
-- [ ] only update this after committing code on website, otherwise it screws up with branches
-- [ ] get rid of all console.logs after completed because of security purposes to not show user UID's
-
-#### github features:
-
-consider using branches to organize code so nothin is just on one branch (buggy / unstable)
-
-https://stackoverflow.com/questions/39585900/what-is-the-difference-between-develop-vs-feature-branch-type
+- [ ] complete ui overhaul
+  - [ ] landing page should be minimal with just sign in / sign up button
+  - [ ] redo hero section (banner should not break with resizing)
+  - [ ] remove absolute positioning on navbar: scroll should make it disappear
+  - [ ] remove shadows on everything
+  - [ ] key features tab (3 simple things)
+  - [ ] erase faq and catalog, should eventually create functionality to upload + scrape pdf
